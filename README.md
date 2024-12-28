@@ -36,6 +36,7 @@ Our trunk health (Continuous Integration signals) can be found at [hud.pytorch.o
     - [Building the image yourself](#building-the-image-yourself)
   - [Building the Documentation](#building-the-documentation)
   - [Previous Versions](#previous-versions)
+- [CNN Example with CIFAR-10](#cnn-example-with-cifar-10)
 - [Getting Started](#getting-started)
 - [Resources](#resources)
 - [Communication](#communication)
@@ -272,6 +273,7 @@ conda install -c conda-forge libuv=1.39
 ```
 
 #### Install PyTorch
+
 **On Linux**
 
 If you would like to compile PyTorch with [new C++ ABI](https://gcc.gnu.org/onlinedocs/libstdc++/manual/using_dual_abi.html) enabled, then first run this command:
@@ -352,6 +354,12 @@ set CUDAHOSTCXX=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC
 python setup.py develop
 
 ```
+
+**這會告訴 Python 使用本地 PyTorch 源碼，而不是安裝的套件**
+```bash
+python setup.py develop
+```
+
 
 ##### Adjust Build Options (Optional)
 
@@ -436,6 +444,36 @@ A combination of versions that is known to work is `node@6.13.1` and
 Installation instructions and binaries for previous PyTorch versions may be found
 on [our website](https://pytorch.org/previous-versions).
 
+## CNN Example with CIFAR-10
+
+This repository includes an example implementation of a Convolutional Neural Network (CNN) for classifying images from the CIFAR-10 dataset using PyTorch.
+
+The full example can be found in [`examples/example_cnn.py`](examples/example_cnn.py).
+
+### How to Run the Example
+
+1. Install the required dependencies:
+   ```bash
+   pip install torch torchvisio
+   ```
+2. Run the Example:
+   ```bash
+   cd examples
+   python example_cnn.py
+   ``` 
+3. Output Example: After training for 1 epoch, the script will display the loss and accuracy on the test dataset, such as:
+   ```yaml
+   112582003 Custom Conv2d initialized with in_channels=1, out_channels=32
+   112582003 Custom Conv2d initialized with in_channels=32, out_channels=64
+   Model structure:
+   SimpleCNN(
+     (conv1): Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+     (conv2): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+     (fc1): Linear(in_features=3136, out_features=128, bias=True)
+     (fc2): Linear(in_features=128, out_features=10, bias=True)
+   )
+   Output shape: torch.Size([1, 10])
+   ```
 
 ## Getting Started
 
